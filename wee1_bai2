@@ -1,0 +1,47 @@
+#include<iostream>
+using namespace std;
+struct node{ //kiểu dữ liệu của node
+    int data;
+    struct node *next;
+};
+node *makeNode(int x){
+    node *newNode=new node; //cấp phát động
+    newNode->data=x;
+    newNode->next=null;
+    return newNode;
+}
+void duyet(node *head){
+    while(head!=null){
+        cout<<head->data;
+        head=head->next;
+    }
+    cout<<endl;
+}
+// thêm đầu
+node *them_dau(node *head,int x){
+    node *newNode=makeNode(x);
+    newNode->next=head;
+    head=newNode;
+    return newNode;
+}// cách này thì phải gắn head=them_dau
+
+void them_dau(node *&head,int x){ //thêm đầu dùng tham chiếu
+    node *newNode=makeNode(x);
+    newNode->next=head;
+    head=newNode;
+}
+
+void them_cuoi(node *&head,int x){
+    node *newNode=makeNode(x);
+    if(head==NULL){
+        head=newNode ;
+        return;
+    }
+    node *tmp=head;
+    while(tmp->next!=NULL){
+        tmp=tmp->next;
+    }
+    tmp->next=newNode;
+}
+
+
