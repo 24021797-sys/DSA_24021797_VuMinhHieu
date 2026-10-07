@@ -1,0 +1,70 @@
+#include <iostream>
+using namespace std;
+struct node{
+    int data;
+    struct node *next;
+    struct node *prev;
+};
+node *makeNode(int x){
+    node *newNode=new node;
+    newNode->data=x;
+    newNode->prev=NULL;
+    newNode->next=NULL;
+    return newNode;
+}
+void duyet(node *head){
+    while(head!=NULL){
+        cout<<head->data<<" ";
+        head=head->next;
+    }
+    cout<<"\n";
+}
+int dem(node*head){
+    int n=0;
+    while(head!=NULL){
+        n++;
+        head=head->next;
+    }
+    return n;
+}
+void them_dau(node *&head, int x){
+    node *newNode=makeNode(x);
+    if(head==NULL){
+        head=newNode;
+        return;
+    }
+    newNode->next=head;
+    head->prev=newNode;
+    head=newNode;
+}
+void them_cuoi(node *&head, int x){
+    if(head==NULL){ them_dau(head,x); return;}
+    node *newNode=makeNode(x);
+    node *tmp=head;
+    while(tmp->next!=NULL){
+        tmp=tmp->next;
+    }
+    tmp->next=newNode;
+    newNode->prev=tmp;
+}
+void them_giua(node *&head,int x, int pos){
+    int n = dem(head);
+    if (pos < 0 || pos > n) return;
+    if (pos == 0) {
+        them_dau(head, x);
+        return;
+    }
+    if (pos == n) {                      
+        them_cuoi(head, x);
+        return;
+    }
+    node *newNode=makeNode(x);
+    node *tmp=head;
+    for(int i=0;i<=pos-1;i++){
+        tmp=tmp->next;
+    }
+    newNode->next=tmp;
+    (tmp->prev)->next=newNode;
+    newNode->prev=tmp->prev;
+    tmp->prev=newNode;
+}
