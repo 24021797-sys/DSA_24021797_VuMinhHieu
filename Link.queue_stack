@@ -1,0 +1,50 @@
+#include <iostream>
+#Include "list.h"
+using namespace std;
+
+// QUEUE
+struct queue(){
+    link L;
+    void enqueue( int x){ L.insertTail(x)} //O(1)
+    void dequeue() {L.deleteHead()} //O(N)
+    bool ktra_empty() {L.isempty()} //O(1)
+    int dem_phan_tu() {L.size()}  //O(1)
+    int front() {L.getAt(0)} //O(1);
+};
+
+//STACK
+struct Stack {
+    List list; // Tận dụng lại struct List đã viết ở file kia
+
+    void init() {
+        list.init();
+    }
+
+    bool isEmpty() {
+        return (list.n == 0);
+    }
+
+    void push(int val) {
+        // Dùng các hàm/thuộc tính của List để thao tác cho Stack
+        if (list.n >= MAX) {
+            cout << "Stackเต็ม / Stack da day!\n";
+            return;
+        }
+        list.data[list.n++] = val; 
+    }
+
+    void pop() {
+        if (isEmpty()) {
+            cout << "Stack rong!\n";
+            return;
+        }
+        list.n--;
+    }
+
+    int top() {
+        if (isEmpty()) return -1;
+        return list.data[list.n - 1]; // Phần tử ở đỉnh stack
+    }
+};
+   
+   
